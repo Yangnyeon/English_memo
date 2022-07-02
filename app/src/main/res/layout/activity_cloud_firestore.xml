@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Real_Community.Cloud_firestore"
+    android:orientation="vertical"
+    android:background="@drawable/eng">
+
+    <ImageView
+        android:id="@+id/community_back"
+        android:layout_width="60sp"
+        android:layout_height="60sp"
+        android:layout_marginTop="10sp"
+        android:src="@drawable/ic_baseline_keyboard_arrow_left_24">
+    </ImageView>
+
+
+    <TextView
+        android:id="@+id/ha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16sp"
+        android:layout_marginTop="110sp"
+        android:fontFamily="@font/font"
+        android:text="자유 게시판"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16sp"
+        android:layout_marginTop="180sp"
+        android:fontFamily="@font/font"
+        android:text="나만의 영어 단어 어플 게시판에서 \n\n 서로의 의견들을공유해보세요!"
+        android:textColor="#FFEB3B"
+        android:textSize="20sp"></TextView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="250sp" />
+
+    <Button
+        android:id="@+id/btn_read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="읽기"
+        android:visibility="invisible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#000000"
+        android:backgroundTint="#3CC82B"
+        android:src="@drawable/ic_baseline_upload_24">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+
+
+
+</RelativeLayout>

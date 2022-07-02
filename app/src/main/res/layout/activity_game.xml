@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Game.Game_Activity"
+    android:orientation="vertical"
+    android:background="@drawable/game_back">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/go_rest"
+                android:text="레스토랑 가기"
+                android:visibility="invisible"
+                ></Button>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="350sp"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="40sp"
+                    android:text="    영어 게임"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="120sp"
+                    android:fontFamily="@font/font"
+                    ></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:text="        내가 등록한 단어로 게임을 해보세요!"
+                    android:textColor="#0E0E0E"
+                    android:layout_marginTop="30sp"
+                    android:fontFamily="@font/font"
+                    ></TextView>
+
+
+
+
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="300sp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    >
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="200sp"
+                        android:layout_height="300sp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="vertical"
+                        app:cardCornerRadius="8sp"
+                        android:id="@+id/go_Dictaion"
+                        android:backgroundTint="#00000000"
+                        >
+
+                        <ImageView
+                            android:layout_width="200sp"
+                            android:layout_height="250sp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/game_image1"
+                            ></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="30sp"
+                            android:text="영어 받아쓰기 "
+                            android:layout_marginTop="255sp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:fontFamily="@font/font"
+                            android:id="@+id/game_imagetext"
+                            ></TextView>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="200sp"
+                        android:layout_height="300sp"
+                        android:layout_marginLeft="100sp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="vertical"
+                        app:cardCornerRadius="8sp"
+                        android:id="@+id/go_word"
+                        android:background="#00000000"
+                        android:backgroundTint="#00000000"
+                        >
+
+                        <ImageView
+                            android:layout_width="200sp"
+                            android:layout_height="250sp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/game_image2"
+                            >
+
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="30sp"
+                            android:text="영어 단어 게임"
+                            android:layout_marginTop="255sp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:fontFamily="@font/font"
+                            android:id="@+id/game_imagetext2"
+
+                            ></TextView>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="200sp"
+                        android:layout_height="300sp"
+                        android:layout_marginLeft="100sp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="vertical"
+                        app:cardCornerRadius="8sp"
+                        >
+
+                        <ImageView
+                            android:layout_width="200sp"
+                            android:layout_height="250sp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/restaurant_image"></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="30sp"
+                            android:text="하하하3"
+                            android:layout_marginTop="255sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:id="@+id/game_imagetext3"
+                            ></TextView>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+            </HorizontalScrollView>
+
+
+
+
+
+
+
+        </FrameLayout>
+
+
+    </ScrollView>
+
+</FrameLayout>

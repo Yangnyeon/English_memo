@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Game.Game_word"
+    android:orientation="vertical"
+    android:background="@drawable/translate_bg">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="16sp"
+                >
+
+                <TextView
+                    android:id="@+id/count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 /"
+                    android:textSize="30sp"></TextView>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:text=" 10"
+                    ></TextView>
+
+
+
+            </LinearLayout>
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text="알맞은 영어단어는?"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#000000"
+        android:fontFamily="@font/font"
+
+        ></TextView>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text="영어"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#000000"
+        android:fontFamily="@font/font"
+        android:layout_marginTop="30sp"
+        android:id="@+id/english_word2"
+        ></TextView>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="10sp"
+        >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="80sp"
+                android:id="@+id/Card1"
+                app:cardCornerRadius="16sp"
+                android:layout_margin="16sp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="23sp"
+                    android:text="영어1"
+                    android:layout_gravity="center"
+                    android:id="@+id/word1"
+                    android:fontFamily="@font/font"
+                    ></TextView>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="80sp"
+                android:id="@+id/Card2"
+                android:layout_marginTop="10sp"
+                app:cardCornerRadius="16sp"
+                android:layout_margin="16sp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="23sp"
+                    android:text="영어2"
+                    android:layout_gravity="center"
+                    android:id="@+id/word2"
+                    android:fontFamily="@font/font"
+                    ></TextView>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="80sp"
+                android:id="@+id/Card3"
+                android:layout_marginTop="10sp"
+                app:cardCornerRadius="16sp"
+                android:layout_margin="16sp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="23sp"
+                    android:text="영어3"
+                    android:layout_gravity="center"
+                    android:id="@+id/word3"
+                    android:fontFamily="@font/font"
+                    ></TextView>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="80sp"
+                android:id="@+id/Card4"
+                android:layout_marginTop="10sp"
+                app:cardCornerRadius="16sp"
+                android:layout_margin="16sp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="23sp"
+                    android:text="영어4"
+                    android:id="@+id/word4"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/font"
+                    ></TextView>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+            <TextView
+                android:id="@+id/word_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="영어해석"
+                android:textSize="1sp"
+                android:visibility="invisible"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="누를시 나오는단어"
+                android:id="@+id/word_result2"
+                android:visibility="invisible"
+                android:textSize="1sp"
+                ></TextView>
+
+
+
+
+
+
+            <androidx.cardview.widget.CardView
+            android:layout_width="250sp"
+            android:layout_height="50sp"
+            app:cardCornerRadius="16sp"
+            android:layout_gravity="center"
+            android:backgroundTint="#46C9DA"
+            android:id="@+id/correct_input2"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="정답 입력!"
+                android:layout_gravity="center"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                ></TextView>
+
+        </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

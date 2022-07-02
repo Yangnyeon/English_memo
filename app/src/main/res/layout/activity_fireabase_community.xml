@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Community.Fireabase_community"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textview123"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="text" />
+
+
+    <LinearLayout
+        android:gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp" >
+
+        <EditText
+            android:id="@+id/edittext"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send" />
+
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edittext2"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/re_gogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="리사이클러뷰 고고" />
+
+    <Button
+        android:id="@+id/fi_gogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="파이어스토 어 고고" />
+
+</LinearLayout>

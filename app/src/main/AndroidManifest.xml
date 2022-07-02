@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.english_memo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.English_memo">
+        <activity
+            android:name=".Game.Game_result"
+            android:exported="true" />
+        <activity
+            android:name=".Game.Game_word"
+            android:exported="true" />
+        <activity
+            android:name=".Game.Game_Activity"
+            android:exported="true" />
+        <activity
+            android:name=".Game.Real_Community2"
+            android:exported="true" />
+        <activity
+            android:name=".Real_Community.Community_holdedr"
+            android:exported="true" />
+        <activity
+            android:name=".Real_Community.Cloud_firestore"
+            android:exported="true" />
+        <activity
+            android:name=".Community.FirebaseTranning_2"
+            android:exported="true" />
+        <activity
+            android:name=".Community.Firebase_tranning2"
+            android:exported="true"
+            android:label="@string/title_activity_firebase_tranning2"
+            android:theme="@style/Theme.English_memo.NoActionBar" />
+        <activity
+            android:name=".Community.Fireabase_community"
+            android:exported="true" />
+        <activity
+            android:name=".Room_memo.Translage_memo"
+            android:exported="true" />
+        <activity
+            android:name=".Translate.Translate"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
