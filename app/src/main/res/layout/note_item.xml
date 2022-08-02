@@ -29,7 +29,7 @@
                     ></TextView>
 
 
-                </LinearLayout>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/delete"
@@ -37,7 +37,8 @@
             android:layout_height="30sp"
             android:layout_marginLeft="310sp"
             android:layout_marginTop="25sp"
-            android:src="@drawable/ic_baseline_restore_from_trash_24"></ImageView>
+            android:src="@drawable/ic_baseline_restore_from_trash_24">
+        </ImageView>
 
 
                 <TextView

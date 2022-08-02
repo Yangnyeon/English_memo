@@ -14,8 +14,10 @@ class RecyclerViewAdapter(val listener: RowClickListener, private var items : Ar
     private var context1: Context? = null
     lateinit var trans : Translage_memo
 
+    private var userList = emptyList<UserEntity>()
+
     fun setListData(data: ArrayList<UserEntity>) {
-        this.items = data
+        this.userList = data
         this.context1 = context1
     }
 
@@ -30,9 +32,9 @@ class RecyclerViewAdapter(val listener: RowClickListener, private var items : Ar
 
     override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
-            listener.onItemClickupdateListener(items[position])
+            listener.onItemClickupdateListener(userList[position])
         }
-        holder.bind(items[position])
+        holder.bind(userList[position])
 
         if (this::trans.isInitialized) {
             trans.contents_visible.setOnCheckedChangeListener { compoundButton, isChecked ->
@@ -46,7 +48,7 @@ class RecyclerViewAdapter(val listener: RowClickListener, private var items : Ar
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return userList.size
     }
 
     class MyViewHolder(view: View, val listener: RowClickListener) : RecyclerView.ViewHolder(view) {
@@ -76,5 +78,12 @@ class RecyclerViewAdapter(val listener: RowClickListener, private var items : Ar
         fun onItemClickupdateListener(user: UserEntity)
         fun onItemvisible(user: UserEntity)
     }
+
+
+    fun setData(user : List<UserEntity>){
+        userList = user
+        notifyDataSetChanged()
+    }
+
 
 }

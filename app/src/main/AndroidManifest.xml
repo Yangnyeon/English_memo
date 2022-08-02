@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.English_memo">
         <activity
+            android:name=".Real_Community.Community_holder"
+            android:exported="true" />
+        <activity
             android:name=".Game.Game_result"
             android:exported="true" />
         <activity

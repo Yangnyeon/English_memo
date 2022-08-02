@@ -18,6 +18,7 @@ import com.example.english_memo.Room_memo.Translage_memo
 import com.example.english_memo.Translate.Translate
 import kotlinx.android.synthetic.main.activity_game_word.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 
@@ -34,10 +35,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent1)
         }
 
-        memo_gogo.setOnClickListener {
-            var intent2 = Intent(this, Translage_memo::class.java)
-            startActivity(intent2)
+
+        try {
+            memo_gogo.setOnClickListener {
+                var intent2 = Intent(this, Translage_memo::class.java)
+                startActivity(intent2)
+            }
+        } catch (e: Exception) {
+
         }
+
 
 
         val currentTime : Long = System.currentTimeMillis() // ms로 반환
