@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.English_memo">
         <activity
-            android:name=".Real_Community.Community_holder"
+            android:name=".Login.Registration_Activity"
             android:exported="true" />
         <activity
-            android:name=".Game.Game_result"
+            android:name=".Real_Community.Community_holder"
             android:exported="true" />
         <activity
             android:name=".Game.Game_word"
@@ -36,11 +36,6 @@
             android:name=".Community.FirebaseTranning_2"
             android:exported="true" />
         <activity
-            android:name=".Community.Firebase_tranning2"
-            android:exported="true"
-            android:label="@string/title_activity_firebase_tranning2"
-            android:theme="@style/Theme.English_memo.NoActionBar" />
-        <activity
             android:name=".Community.Fireabase_community"
             android:exported="true" />
         <activity
@@ -51,6 +46,9 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Login.Login_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -23,7 +23,7 @@ interface UserDao {
     @Query("SELECT * FROM English_memo")
     fun getUserAll(): List<UserEntity>?
 
-    @Query("SELECT * FROM English_memo WHERE contents LIKE :searchQuery")
+    @Query("SELECT * FROM English_memo WHERE contents LIKE :searchQuery ORDER BY id DESC")
     fun searchDatabase(searchQuery : String) : Flow<List<UserEntity>>
 
 }
