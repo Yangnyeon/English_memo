@@ -16,6 +16,8 @@ import com.example.english_memo.loading_screen
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.android.synthetic.main.activity_main_bar_activitity.*
+import kotlinx.android.synthetic.main.activity_main_bar_activitity.view.*
 import java.util.*
 
 class Login_Activity : AppCompatActivity() {
@@ -63,26 +65,19 @@ class Login_Activity : AppCompatActivity() {
 
          */
 
-        val loadingAnimDialog = loading_screen(this@Login_Activity)
-
-        loadingAnimDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
             binding.profileButton.setOnClickListener{
 
                 if(email.text!!.isEmpty() && password.text!!.isEmpty()) {
-                    loadingAnimDialog.show()
                     Toast.makeText(this, "아이디와 비밀번호를 제대로 입력해주세요.", Toast.LENGTH_SHORT).show()
                     Log.d("Email", "$email, $password")
                     email.setText("")
                     password.setText("")
-                    loadingAnimDialog.dismiss()
                 }
                 else{
-                    loadingAnimDialog.show()
                     signIn(email.text.toString(), password.text.toString())
-                    loadingAnimDialog.dismiss()
                 }
             }
+
 
 
         binding.btnRegistration.setOnClickListener {
@@ -96,22 +91,25 @@ class Login_Activity : AppCompatActivity() {
 
     private fun signIn(email: String, password: String) {
         // [START sign_in_with_email]
-        val intentMain = Intent(this, MainActivity::class.java)
+        val intentMain = Intent(this@Login_Activity, MainActivity::class.java)
+
+        val loadingAnimDialog = loading_screen(this@Login_Activity)
+
+        loadingAnimDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        loadingAnimDialog.show()
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Log.d("로그인", "성공")
-                    val user = auth.currentUser
-                    updateUI(user)
-                    finish()
-                    startActivity(intentMain)
-                    //moveMainPage(auth?.currentUser)
+                    //finish()
+                    //startActivity(intentMain)
+                    moveMainPage(auth?.currentUser)
+                    loadingAnimDialog.dismiss()
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(this, "정확한 아이디와 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
-                    Log.d("로그인", "실패")
-                    updateUI(null)
+                    loadingAnimDialog.dismiss()
                 }
             }
         // [END sign_in_with_email]

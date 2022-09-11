@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +7,8 @@
     tools:context=".Translate.Translate"
     android:orientation="vertical"
     android:background="@drawable/translate_bg7">
+
+    <include layout="@layout/activity_main_bar_activitity"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,7 +32,8 @@
                     android:layout_width="40sp"
                     android:layout_height="40sp"
                     android:src="@drawable/ic_baseline_west_24"
-                    android:layout_margin="16sp"
+                    android:layout_marginLeft="16sp"
+                    android:layout_marginTop="50sp"
                     android:id="@+id/back"
                     ></ImageView>
 
@@ -204,4 +207,4 @@
         android:id="@+id/btn"
         ></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
-</FrameLayout>
+</LinearLayout>

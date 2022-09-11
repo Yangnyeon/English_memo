@@ -1,22 +1,32 @@
 package com.example.english_memo.Translate
 
 import android.content.ContentValues
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.english_memo.BuildConfig.*
+import com.example.english_memo.MainActivity
 import com.example.english_memo.NaverAPI
 import com.example.english_memo.R
 import com.example.english_memo.ResultTransferPapago
 import com.example.english_memo.Room_memo.MainActivityViewModel
 import com.example.english_memo.Room_memo.RecyclerViewAdapter
 import com.example.english_memo.Room_memo.UserEntity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main_bar_activitity.*
+import kotlinx.android.synthetic.main.activity_main_bar_activitity.view.*
 import kotlinx.android.synthetic.main.activity_translage_memo.*
 import kotlinx.android.synthetic.main.activity_translate.*
 import kotlinx.android.synthetic.main.activity_translate.back
@@ -25,11 +35,31 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.system.exitProcess
+import android.view.MenuItem
+
+
+
 
 class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
 
     private lateinit var recyclerViewAdapter: RecyclerViewAdapter
     lateinit var viewModel: MainActivityViewModel
+
+    companion object{
+        private var imageUri : Uri? = null
+        private val fireStorage = FirebaseStorage.getInstance().reference
+        private val fireDatabase = FirebaseDatabase.getInstance().reference
+        private val user = Firebase.auth.currentUser
+        private val uid = user?.uid.toString()
+
+
+        private lateinit var auth: FirebaseAuth
+
+        fun newInstance() : MainActivity {
+            return MainActivity()
+        }
+    }
 
 
     var items123 = ArrayList<UserEntity>()
@@ -113,9 +143,34 @@ class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
         }
 
         plus.setOnClickListener {
-            val insertgogo = UserEntity(0,textView.text.toString(), et_target.text.toString())
-            viewModel.insertUserInfo(insertgogo)
-            Toast.makeText(this,"단어가 저장되었습니다.", Toast.LENGTH_SHORT).show()
+            if(start_lag.text == "한국어") {
+                val insertgogo = UserEntity(0,textView.text.toString(), et_target.text.toString())
+                viewModel.insertUserInfo(insertgogo)
+                Toast.makeText(this,"단어가 저장되었습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                val insertgogo = UserEntity(0,et_target.text.toString(), textView.text.toString())
+                viewModel.insertUserInfo(insertgogo)
+                Toast.makeText(this,"단어가 저장되었습니다.", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+        setSupportActionBar(main_layout_toolbar) // 툴바를 액티비티의 앱바로 지정
+        supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+        main_layout_toolbar.log_out.setOnClickListener {
+            auth.signOut()
+            //println(userProfile)
+            ActivityCompat.finishAffinity(this@Translate)
+            exitProcess(0)
+            finish()
+            Toast.makeText(this@Translate, "로그아웃 되었습니다!", Toast.LENGTH_SHORT).show()
+        }
+
+        bar_title.setOnClickListener {
+            Toast.makeText(this@Translate, "ㅇㅇ", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -130,6 +185,17 @@ class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
 
 
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                //toolbar의 back키 눌렀을 때 동작
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDeleteUserClickListener(user: UserEntity) {

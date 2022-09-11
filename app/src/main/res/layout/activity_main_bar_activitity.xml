@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="55sp"
+        android:minHeight="?attr/actionBarSize"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내가 만드는 영어 단어장!"
+            android:textSize="22sp"
+            android:textColor="#673AB7"
+            android:fontFamily="@font/jua"
+            android:textStyle="bold"
+            android:id="@+id/bar_title"
+            android:layout_gravity="center" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_logout_24"
+            android:id="@+id/log_out"
+            android:layout_gravity="end"
+            android:layout_marginRight="16sp"
+            android:padding="8sp"
+            ></ImageView>
+
+    </androidx.appcompat.widget.Toolbar>
+
+</LinearLayout>
