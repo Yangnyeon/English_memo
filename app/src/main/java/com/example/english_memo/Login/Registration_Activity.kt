@@ -2,6 +2,8 @@ package com.example.english_memo.Login
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +17,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import com.example.english_memo.MainActivity
 import com.example.english_memo.R
+import com.example.english_memo.loading_screen
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -31,23 +34,6 @@ lateinit var database: DatabaseReference
 class Registration_Activity : AppCompatActivity() {
 
 
-    private var imageUri : Uri? = null
-
-    //이미지 등록
-    private val getContent =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            if(result.resultCode == RESULT_OK) {
-                imageUri = result.data?.data //이미지 경로 원본
-                registration_iv.setImageURI(imageUri) //이미지 뷰를 바꿈
-                Log.d("이미지", "성공")
-            }
-            else{
-                Log.d("이미지", "실패")
-            }
-        }
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
@@ -62,59 +48,45 @@ class Registration_Activity : AppCompatActivity() {
         var reapssword = et_registration_repassword.text
         val name = findViewById<TextInputEditText>(R.id.et_registration_name).text
         val button = findViewById<CardView>(R.id.btn_registration)
-        val profile = findViewById<ImageView>(R.id.registration_iv)
-        var profileCheck = false
 
-        profile.setOnClickListener{
-            val intentImage = Intent(Intent.ACTION_PICK)
-            intentImage.type = MediaStore.Images.Media.CONTENT_TYPE
-            getContent.launch(intentImage)
-            profileCheck = true
-        }
-
-        val intent = Intent(this, MainActivity::class.java)
 
         button.setOnClickListener {
-            if(email!!.isEmpty() && password!!.isEmpty() && name!!.isEmpty() && profileCheck)  {
-                Toast.makeText(this, "아이디와 비밀번호, 프로필 사진을 제대로 입력해주세요.", Toast.LENGTH_SHORT).show()
+
+            val loadingAnimDialog = loading_screen(this@Registration_Activity)
+
+            loadingAnimDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            loadingAnimDialog.show()
+
+            if(email!!.isEmpty() && password!!.isEmpty() && name!!.isEmpty())  {
+                Toast.makeText(this, "아이디와 비밀번호 를 제대로 입력해주세요!", Toast.LENGTH_SHORT).show()
                 Log.d("Email", "$email, $password")
             }
-
             if(!password!!.toString().equals(reapssword.toString())) {
                 Toast.makeText(this, "비밀번호 재확인이 일치하지않습니다.", Toast.LENGTH_SHORT).show()
             }
+            else {
+                auth.createUserWithEmailAndPassword(email.toString(), password.toString())
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            val user = Firebase.auth.currentUser
+                            val userId = user?.uid
+                            val userIdSt = userId.toString()
+                            val friend = Friend(
+                                email.toString(),
+                                name.toString(),
+                                userIdSt
+                            )
+                            database.child("users").child(userId.toString())
+                                .setValue(friend)
 
-            else{
-                if(!profileCheck){
-                    Toast.makeText(this, "프로필사진을 등록해주세요.", Toast.LENGTH_SHORT).show()
-                } else{
-                    auth.createUserWithEmailAndPassword(email.toString(), password.toString())
-                        .addOnCompleteListener(this) { task ->
-                            if (task.isSuccessful) {
-                                val user = Firebase.auth.currentUser
-                                val userId = user?.uid
-                                val userIdSt = userId.toString()
-
-                                FirebaseStorage.getInstance()
-                                    .reference.child("userImages").child("$userIdSt/photo").putFile(imageUri!!).addOnSuccessListener {
-                                        var userProfile: Uri? = null
-                                        FirebaseStorage.getInstance().reference.child("userImages").child("$userIdSt/photo").downloadUrl
-                                            .addOnSuccessListener {
-                                                userProfile = it
-                                                Log.d("이미지 URL", "$userProfile")
-                                                val friend = Friend(email.toString(), name.toString(), userProfile.toString(), userIdSt)
-                                                database.child("users").child(userId.toString()).setValue(friend)
-                                            }
-                                    }
-                                Toast.makeText(this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                                Log.e(TAG, "$userId")
-                                finish()
-                                //startActivity(intent)
-                            } else {
-                                Toast.makeText(this, "등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
-                            }
+                            loadingAnimDialog.dismiss()
+                            Toast.makeText(this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                            finish()
+                        } else {
+                            Toast.makeText(this, "등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
                         }
-                }
+                    }
             }
         }
     }

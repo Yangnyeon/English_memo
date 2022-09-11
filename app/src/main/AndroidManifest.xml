@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.English_memo">
         <activity
+            android:name=".loading_screen"
+            android:exported="true" />
+        <activity
             android:name=".Login.Registration_Activity"
             android:exported="true" />
         <activity

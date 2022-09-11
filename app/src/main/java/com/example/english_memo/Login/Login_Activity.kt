@@ -1,6 +1,8 @@
 package com.example.english_memo.Login
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +12,7 @@ import androidx.cardview.widget.CardView
 import com.example.english_memo.MainActivity
 import com.example.english_memo.R
 import com.example.english_memo.databinding.ActivityLoginBinding
+import com.example.english_memo.loading_screen
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -60,15 +63,24 @@ class Login_Activity : AppCompatActivity() {
 
          */
 
+        val loadingAnimDialog = loading_screen(this@Login_Activity)
+
+        loadingAnimDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
             binding.profileButton.setOnClickListener{
+
                 if(email.text!!.isEmpty() && password.text!!.isEmpty()) {
+                    loadingAnimDialog.show()
                     Toast.makeText(this, "아이디와 비밀번호를 제대로 입력해주세요.", Toast.LENGTH_SHORT).show()
                     Log.d("Email", "$email, $password")
                     email.setText("")
                     password.setText("")
+                    loadingAnimDialog.dismiss()
                 }
                 else{
+                    loadingAnimDialog.show()
                     signIn(email.text.toString(), password.text.toString())
+                    loadingAnimDialog.dismiss()
                 }
             }
 
@@ -94,7 +106,7 @@ class Login_Activity : AppCompatActivity() {
                     updateUI(user)
                     finish()
                     startActivity(intentMain)
-                    moveMainPage(auth?.currentUser)
+                    //moveMainPage(auth?.currentUser)
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(this, "정확한 아이디와 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
