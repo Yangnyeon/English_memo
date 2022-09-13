@@ -9,14 +9,9 @@
     android:background="@drawable/translate_bg7"
     >
 
+    <include layout="@layout/activity_main_bar_activitity"/>
 
-    <ImageView
-        android:layout_width="40sp"
-        android:layout_height="40sp"
-        android:src="@drawable/ic_baseline_west_24"
-        android:layout_margin="16sp"
-        android:id="@+id/back"
-        ></ImageView>
+
 
     <TextView
         android:layout_width="wrap_content"

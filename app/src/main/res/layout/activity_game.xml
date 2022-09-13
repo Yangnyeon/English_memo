@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +7,8 @@
     tools:context=".Game.Game_Activity"
     android:orientation="vertical"
     android:background="@drawable/game_back">
+
+    <include layout="@layout/activity_main_bar_activitity"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -91,7 +93,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textSize="30sp"
-                            android:text="영어 받아쓰기 "
+                            android:text="준비중"
                             android:layout_marginTop="255sp"
                             android:textStyle="bold"
                             android:gravity="center"
@@ -192,4 +194,4 @@
 
     </ScrollView>
 
-</FrameLayout>
+</LinearLayout>

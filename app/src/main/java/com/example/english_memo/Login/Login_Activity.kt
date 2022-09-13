@@ -39,18 +39,11 @@ class Login_Activity : AppCompatActivity() {
 
         //자동 로그인
 
-        /*
+
         var currentUser = auth?.currentUser
 
         if (currentUser == null) {
 
-            Timer().schedule(object : TimerTask() {
-                override fun run() {
-                    val intent: Intent = Intent(applicationContext, LoginActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-            }, 100000000000)
 
         }else{
             Timer().schedule(object : TimerTask() {
@@ -63,7 +56,7 @@ class Login_Activity : AppCompatActivity() {
 
         }
 
-         */
+
 
             binding.profileButton.setOnClickListener{
 

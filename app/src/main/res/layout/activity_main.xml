@@ -36,7 +36,6 @@
                 android:id="@+id/Welcome"
                 android:textSize="35sp"
                 android:textColor="#3F51B5"
-                android:layout_marginTop="80sp"
                 android:padding="16sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/font"

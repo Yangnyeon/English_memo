@@ -147,26 +147,34 @@ class MainActivity : AppCompatActivity() {
 
             setSupportActionBar(main_layout_toolbar) // 툴바를 액티비티의 앱바로 지정
             supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
-            //supportActionBar?.setDisplayHomeAsUpEnabled(true) 뒤로가기
+
             main_layout_toolbar.log_out.setOnClickListener {
-                try {
-                    auth.signOut()
-                }catch (e : Exception) {
+                val builder = AlertDialog.Builder(this@MainActivity)
+
+                val tvName = TextView(this@MainActivity)
+                tvName.text = "\n\n로그아웃 하시겟습니까?"
+
+                val mLayout = LinearLayout(this@MainActivity)
+                mLayout.orientation = LinearLayout.VERTICAL
+                mLayout.setPadding(16)
+                mLayout.addView(tvName)
+                builder.setView(mLayout)
+
+                builder.setPositiveButton("확인") { dialog, which ->
+                    auth = FirebaseAuth.getInstance()
+
                     Toast.makeText(this@MainActivity, "로그아웃 되었습니다!", Toast.LENGTH_SHORT).show()
+                    auth.signOut()
+                    //println(userProfile)
                     ActivityCompat.finishAffinity(this@MainActivity)
                     exitProcess(0)
                     finish()
                 }
-                Toast.makeText(this@MainActivity, "로그아웃 되었습니다!", Toast.LENGTH_SHORT).show()
-                ActivityCompat.finishAffinity(this@MainActivity)
-                exitProcess(0)
-                finish()
+                builder.setNegativeButton("취소") { dialog, which ->
 
-            }
-            bar_title.setOnClickListener {
-                Toast.makeText(this@MainActivity, "ㅇㅇ", Toast.LENGTH_SHORT).show()
+                }
+                builder.show()
             }
         }
-
     }
 }

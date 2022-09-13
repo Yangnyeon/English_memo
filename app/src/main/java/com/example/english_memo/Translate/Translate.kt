@@ -29,7 +29,6 @@ import kotlinx.android.synthetic.main.activity_main_bar_activitity.*
 import kotlinx.android.synthetic.main.activity_main_bar_activitity.view.*
 import kotlinx.android.synthetic.main.activity_translage_memo.*
 import kotlinx.android.synthetic.main.activity_translate.*
-import kotlinx.android.synthetic.main.activity_translate.back
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,8 +36,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.system.exitProcess
 import android.view.MenuItem
-
-
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.setPadding
+import com.example.english_memo.Room_memo.Translage_memo
 
 
 class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
@@ -161,36 +163,39 @@ class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
 
 
         main_layout_toolbar.log_out.setOnClickListener {
-            auth.signOut()
-            //println(userProfile)
-            ActivityCompat.finishAffinity(this@Translate)
-            exitProcess(0)
-            finish()
-            Toast.makeText(this@Translate, "로그아웃 되었습니다!", Toast.LENGTH_SHORT).show()
+            val builder = AlertDialog.Builder(this)
+
+            val tvName = TextView(this)
+            tvName.text = "\n\n로그아웃 하시겟습니까?"
+
+            val mLayout = LinearLayout(this)
+            mLayout.orientation = LinearLayout.VERTICAL
+            mLayout.setPadding(16)
+            mLayout.addView(tvName)
+            builder.setView(mLayout)
+
+            builder.setPositiveButton("확인") { dialog, which ->
+
+                auth = FirebaseAuth.getInstance()
+
+                Toast.makeText(this@Translate, "로그아웃 되었습니다!", Toast.LENGTH_SHORT).show()
+                auth.signOut()
+                //println(userProfile)
+                ActivityCompat.finishAffinity(this@Translate)
+                exitProcess(0)
+                finish()
+            }
+            builder.setNegativeButton("취소") { dialog, which ->
+
+            }
+            builder.show()
         }
-
-        bar_title.setOnClickListener {
-            Toast.makeText(this@Translate, "ㅇㅇ", Toast.LENGTH_SHORT).show()
-        }
-
-
-        // 레트로핏 네이버
-
-        back.setOnClickListener {
-            finish()
-        }
-
-
-
-
-
 
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                //toolbar의 back키 눌렀을 때 동작
                 finish()
                 return true
             }
