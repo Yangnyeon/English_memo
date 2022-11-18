@@ -19,8 +19,7 @@ import com.example.english_memo.ResultTransferPapago
 import com.example.english_memo.Room_memo.MainActivityViewModel
 import com.example.english_memo.Room_memo.RecyclerViewAdapter
 import com.example.english_memo.Room_memo.UserEntity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
+
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -34,13 +33,14 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.system.exitProcess
 import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.setPadding
 import com.example.english_memo.Room_memo.Translage_memo
+import java.util.*
+import kotlin.system.exitProcess
 
 
 class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
@@ -52,11 +52,7 @@ class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
         private var imageUri : Uri? = null
         private val fireStorage = FirebaseStorage.getInstance().reference
         private val fireDatabase = FirebaseDatabase.getInstance().reference
-        private val user = Firebase.auth.currentUser
-        private val uid = user?.uid.toString()
 
-
-        private lateinit var auth: FirebaseAuth
 
         fun newInstance() : MainActivity {
             return MainActivity()
@@ -146,8 +142,12 @@ class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
 
         plus.setOnClickListener {
             if(start_lag.text == "한국어") {
+
+
                 val insertgogo = UserEntity(0,textView.text.toString(), et_target.text.toString())
                 viewModel.insertUserInfo(insertgogo)
+
+
                 Toast.makeText(this,"단어가 저장되었습니다.", Toast.LENGTH_SHORT).show()
             } else {
                 val insertgogo = UserEntity(0,et_target.text.toString(), textView.text.toString())
@@ -174,6 +174,7 @@ class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
             mLayout.addView(tvName)
             builder.setView(mLayout)
 
+            /*
             builder.setPositiveButton("확인") { dialog, which ->
 
                 auth = FirebaseAuth.getInstance()
@@ -189,6 +190,8 @@ class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
 
             }
             builder.show()
+
+             */
         }
 
     }

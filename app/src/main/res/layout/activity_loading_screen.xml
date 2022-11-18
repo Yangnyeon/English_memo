@@ -8,13 +8,13 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="60sp"
-        android:layout_height="60sp"
-        android:src="@drawable/loading2"
-        android:id="@+id/loading_image"
-        android:background="#00000000"
-        android:backgroundTint="#00000000"
-        ></ImageView>
+        <ImageView
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:src="@drawable/loading2"
+            android:id="@+id/loading_image"
+            android:background="#00000000"
+            android:backgroundTint="#00000000"
+            ></ImageView>
 
 </LinearLayout>

@@ -21,5 +21,15 @@ class English_Repository(application: Application) {
         return UserDao.searchDatabase(searchQuery)
     }
 
+    /*
+    fun items(): Observable<List<ToDoModel>> = store.all()
+        .map {
+                all -> all.map {
+            it.toModel()
+                }
+        }
+
+     */
+
 
 }

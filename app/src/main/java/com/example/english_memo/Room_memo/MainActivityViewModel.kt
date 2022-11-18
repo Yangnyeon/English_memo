@@ -18,7 +18,6 @@ class MainActivityViewModel(app: Application) : AndroidViewModel(app) {
     }
 
 
-
     fun getAllUsersObservers(): MutableLiveData<List<UserEntity>> {
         return allUsers
     }
@@ -36,11 +35,14 @@ class MainActivityViewModel(app: Application) : AndroidViewModel(app) {
         getAllUsers()
     }
 
+    /*
     fun updateUserInfo(entity: UserEntity){
         val userDao = RoomAppDb.getAppDatabase(getApplication())?.userDao()
         userDao?.updateUser(entity)
         getAllUsers()
     }
+
+     */
 
     fun deleteUserInfo(entity: UserEntity){
         val userDao = RoomAppDb.getAppDatabase(getApplication())?.userDao()

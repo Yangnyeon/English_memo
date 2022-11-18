@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Room_memo.Translage_memo"
+    android:orientation="vertical"
+    android:background="@drawable/translate_bg7"
+    >
+
+    <include layout="@layout/activity_main_bar_activitity"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_margin="16sp"
+        android:fontFamily="@font/font"
+        android:text="내 단어장"
+        android:textColor="#000000"
+        android:textSize="40sp"></TextView>
+
+
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/English_Searchview"
+        ></androidx.appcompat.widget.SearchView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:descendantFocusability="blocksDescendants"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/english_recyclerView"
+            ></androidx.recyclerview.widget.RecyclerView>
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

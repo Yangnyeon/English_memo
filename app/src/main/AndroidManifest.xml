@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.English_memo">
         <activity
+            android:name=".rxjavaTranning.Second_Translate_Activity"
+            android:exported="true" />
+        <activity
+            android:name=".rxjavaTranning.First_Translate_Activity"
+            android:exported="true" />
+        <activity
+            android:name=".Translate.Calendar_English"
+            android:exported="true" />
+        <activity
             android:name=".main_bar_activitity"
             android:exported="true" />
         <activity

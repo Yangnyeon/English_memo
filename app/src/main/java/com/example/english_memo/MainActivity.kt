@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -13,16 +12,13 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
-import androidx.core.view.GravityCompat
 import androidx.core.view.setPadding
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.english_memo.Game.Game_Activity
 import com.example.english_memo.Real_Community.Cloud_firestore
-import com.example.english_memo.Game.Real_Community2
 import com.example.english_memo.Login.Friend
-import com.example.english_memo.Room_memo.MainActivityViewModel
 import com.example.english_memo.Room_memo.Translage_memo
+import com.example.english_memo.rxjavaTranning.First_Translate_Activity
+import com.example.english_memo.rxjavaTranning.Second_Translate_Activity
 import com.example.english_memo.Translate.Translate
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -73,6 +69,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent1)
         }
 
+        day.setOnClickListener {
+            var Rx_java_intent = Intent(this, First_Translate_Activity::class.java)
+            startActivity(Rx_java_intent)
+        }
+
+        day2.setOnClickListener {
+            var Rx_java_intent2 = Intent(this, Second_Translate_Activity::class.java)
+            startActivity(Rx_java_intent2)
+        }
 
         try {
             memo_gogo.setOnClickListener {
@@ -141,7 +146,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val userProfile = snapshot.getValue<Friend>()
-                    Welcome.text = userProfile?.name + "님\n" + "환영합니다!"
+                    //Welcome.text = userProfile?.name + "님\n" + "환영합니다!"
                 }
             })
 

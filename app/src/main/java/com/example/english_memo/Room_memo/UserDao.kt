@@ -1,6 +1,5 @@
 package com.example.english_memo.Room_memo
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 

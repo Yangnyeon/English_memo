@@ -30,16 +30,6 @@
             android:orientation="vertical"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Welcome"
-                android:textSize="35sp"
-                android:textColor="#3F51B5"
-                android:padding="16sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/font"
-                ></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,7 +37,6 @@
                 android:textSize="35sp"
                 android:text="Friday"
                 android:textColor="#2196F3"
-
                 android:padding="16sp"
                 android:id="@+id/day"
                 android:textStyle="bold"
