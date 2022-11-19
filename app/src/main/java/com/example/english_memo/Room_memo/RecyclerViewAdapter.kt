@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.note_item.view.*
 
 class RecyclerViewAdapter(val listener: RowClickListener, private var items : ArrayList<UserEntity>): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
 
+    private val mCallback = listener
     private var context1: Context? = null
     lateinit var trans : Translage_memo
 

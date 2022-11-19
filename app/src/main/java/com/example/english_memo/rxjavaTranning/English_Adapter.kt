@@ -41,6 +41,9 @@ class English_Adapter(listener: OnItemClick) : RecyclerView.Adapter<English_Adap
         fun bind(english : English) {
 
             binding.english = english
+            binding.delete.setOnClickListener {
+                mCallback.deleteTodo(english)
+            }
 
         }
     }

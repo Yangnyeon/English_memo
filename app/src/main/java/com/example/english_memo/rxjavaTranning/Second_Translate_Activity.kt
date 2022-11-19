@@ -1,5 +1,6 @@
 package com.example.english_memo.rxjavaTranning
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.english_memo.databinding.ActivitySecondTranslateBinding
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.activity_translage_memo.*
 import java.util.*
 
 class Second_Translate_Activity : AppCompatActivity(), OnItemClick  {
@@ -49,12 +51,50 @@ class Second_Translate_Activity : AppCompatActivity(), OnItemClick  {
         })
 
 
+        binding.EnglishSearchview.setOnQueryTextListener(searchViewTextListener)
+
+
+
     }
 
     private fun setAdapter(consult_List: Observable<List<English>>) {
         //val mAdapter = English_Adapter(this, consult_List as ArrayList<English>)
         //binding.englishRecyclerView.adapter = mAdapter
         binding.englishRecyclerView.layoutManager = LinearLayoutManager(this@Second_Translate_Activity)
+    }
+
+    private var searchViewTextListener: androidx.appcompat.widget.SearchView.OnQueryTextListener =
+        object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            //검색버튼 입력시 호출, 검색버튼이 없으므로 사용하지 않음
+            override fun onQueryTextSubmit(s: String): Boolean {
+                return true
+            }
+
+            //텍스트 입력/수정시에 호출
+            override fun onQueryTextChange(s: String): Boolean {
+                /*
+                val mAdapter = CigaretteAdapter(this@Room_Activity)
+                mAdapter.filter.filter(s)
+                Log.d(TAG, "SearchVies Text is changed : $s")
+
+                 */
+
+                searchDatabase(s)
+
+                return true
+            }
+        }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun searchDatabase(query: String) {
+        val searchQuery = "%$query%"
+
+        viewModel.searchDatabase(searchQuery).observe(this, {
+            val mAdapter = English_Adapter(this)
+            mAdapter.setList(it)
+            mAdapter.notifyDataSetChanged()
+        })
+
     }
 
 

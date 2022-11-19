@@ -5,14 +5,12 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.view.setPadding
+import com.example.english_memo.Calendar.Calendar_View
 import com.example.english_memo.Game.Game_Activity
 import com.example.english_memo.Real_Community.Cloud_firestore
 import com.example.english_memo.Login.Friend
@@ -102,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         day3.setText(day3text.format(currentTime) + "th")
 
         gogo_community.setOnClickListener {
-            var intent3 = Intent(this, Cloud_firestore::class.java)
+            var intent3 = Intent(this, Calendar_View::class.java)
             startActivity(intent3)
         }
 

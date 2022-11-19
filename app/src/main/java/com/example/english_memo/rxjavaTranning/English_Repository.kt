@@ -46,11 +46,11 @@ class English_Repository(application: Application) {
     }
 
 
-    fun readDateData(year : Int, month : Int, day : Int): Single<List<English>> {
+    fun readDateData(year : Int, month : Int, day : Int): Observable<List<English>> {
         return english_dao.readAllData(year, month, day)
     }
 
-    fun searchDatabase(searchQuery: String): Single<List<English>> {
+    fun searchDatabase(searchQuery: String): Observable<List<English>> {
         return english_dao.searchDatabase(searchQuery)
     }
 

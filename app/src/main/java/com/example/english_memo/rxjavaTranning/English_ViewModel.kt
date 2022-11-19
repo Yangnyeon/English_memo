@@ -137,12 +137,18 @@ class English_ViewModel(private val repository : English_Repository) : AndroidVi
 
 
 
-    fun readDateData(year : Int, month : Int, day : Int) {
+    fun readDateData(year : Int, month : Int, day : Int) : MutableLiveData<List<English>> {
 
         repository.readDateData(year, month, day)
             .subscribeOn(Schedulers.io())
             .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
-            .subscribe()
+            .subscribe{
+                _currentData.value = it
+            }
+            .addTo(compositeDisposable = CompositeDisposable())
+
+        return _currentData
+
 
     }
 
@@ -150,11 +156,18 @@ class English_ViewModel(private val repository : English_Repository) : AndroidVi
 
 
 
-    fun searchDatabase(searchQuery: String){
+    fun searchDatabase(searchQuery: String) : MutableLiveData<List<English>>{
+
         repository.searchDatabase(searchQuery)
             .subscribeOn(Schedulers.io())
             .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
-            .subscribe()
+            .subscribe{
+                _currentData.value = it
+            }
+            .addTo(compositeDisposable = CompositeDisposable())
+
+        return _currentData
+
     }
 
 

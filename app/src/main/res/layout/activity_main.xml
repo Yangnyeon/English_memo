@@ -193,7 +193,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="커뮤니티 가기"
+                                android:text="달력별로 보기"
                                 android:textSize="25sp"
                                 android:layout_marginLeft="20sp"
                                 android:textStyle="bold"

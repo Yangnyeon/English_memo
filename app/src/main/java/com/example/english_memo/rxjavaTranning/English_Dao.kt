@@ -26,11 +26,11 @@ interface English_Dao {
 
 
     @Query("SELECT * FROM RxKotlin_English WHERE title LIKE :searchQuery ORDER BY id DESC")
-    fun searchDatabase(searchQuery : String) : Single<List<English>>
+    fun searchDatabase(searchQuery : String) : Observable<List<English>>
 
 
     @Query("SELECT * FROM RxKotlin_English WHERE year = :year AND month = :month AND day = :day ORDER BY id DESC")
-    fun readAllData(year : Int, month : Int, day : Int) : Single<List<English>>
+    fun readAllData(year : Int, month : Int, day : Int) : Observable<List<English>>
 
 
 }
