@@ -63,11 +63,11 @@
             android:name=".Translate.Translate"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        <activity
             android:name=".Login.Login_Activity"
-            android:exported="true">
+            android:exported="true"/>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

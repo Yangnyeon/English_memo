@@ -13,6 +13,9 @@ interface English_Dao {
     //fun getAll(): LiveData<List<English>>
     fun getAll(): Observable<List<English>>
 
+    @Query("SELECT * FROM RxKotlin_English")
+    fun getGameAll(): List<English>?
+
     @Insert
     fun insert(English: English) : Completable
 

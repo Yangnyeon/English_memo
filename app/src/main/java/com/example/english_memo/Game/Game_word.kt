@@ -3,6 +3,7 @@ package com.example.english_memo.Game
 import android.app.Dialog
 import android.content.ContentValues
 import android.graphics.Color
+import android.media.audiofx.LoudnessEnhancer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +22,7 @@ import com.example.english_memo.*
 import com.example.english_memo.BuildConfig.Naver_id
 import com.example.english_memo.BuildConfig.Naver_password
 import com.example.english_memo.Room_memo.*
+import com.example.english_memo.rxjavaTranning.English_Database
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -117,21 +119,24 @@ class Game_word : AppCompatActivity() {
 
 
     fun Problem_produce() {
-        val database: RoomAppDb = Room.databaseBuilder(
+        val database: English_Database = Room.databaseBuilder(
             applicationContext,
-            RoomAppDb::class.java, "AppDBB"
+            English_Database::class.java, "RxKotlin_English"
         )
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
 
-        var userdao : UserDao
+        var userdao: UserDao
 
-        val userList = database?.userDao()?.getUserAll()
+        val userList = database.EnglishDao().getGameAll()
 
         var random = Random
 
-        val num = userList?.size?.let { random.nextInt(it) }
+        val num = userList!!.size?.let {
+            random.nextInt(it)
+        }
+
 
         var arr : ArrayList<String> = ArrayList()
         var arr_trans : ArrayList<String> = ArrayList()
@@ -149,23 +154,23 @@ class Game_word : AppCompatActivity() {
     }
 
     fun Answer_produce() {
-
-
-        val database: RoomAppDb = Room.databaseBuilder(
+        val database: English_Database = Room.databaseBuilder(
             applicationContext,
-            RoomAppDb::class.java, "AppDBB"
+            English_Database::class.java, "RxKotlin_English"
         )
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
 
-        var userdao : UserDao
+        var userdao: UserDao
 
-        val userList = database?.userDao()?.getUserAll()
+        val userList = database.EnglishDao().getGameAll()
 
         var random = Random
 
-        val num2 = userList?.size?.let { random.nextInt(it) }
+        val num = userList!!.size?.let {
+            random.nextInt(it)
+        }
 
         var arr2 : ArrayList<String> = ArrayList()
 
@@ -258,6 +263,13 @@ class Game_word : AppCompatActivity() {
 
     }
 
+    fun card_view_cloor() {
+        Card1.setBackgroundColor(Color.WHITE)
+        Card2.setBackgroundColor(Color.WHITE)
+        Card3.setBackgroundColor(Color.WHITE)
+        Card4.setBackgroundColor(Color.WHITE)
+    }
+
     fun click() {
         if(word_result.text.toString() == word_result2.text.toString()) {
             Toast.makeText(this@Game_word, "정답입니다!", Toast.LENGTH_SHORT).show()
@@ -265,6 +277,7 @@ class Game_word : AppCompatActivity() {
         } else {
             Toast.makeText(this@Game_word, "오답입니다..", Toast.LENGTH_SHORT).show()
         }
+        card_view_cloor()
         arr_tempList.clear()
         Problem_produce()
         Answer_produce()

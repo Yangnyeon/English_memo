@@ -11,9 +11,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.view.setPadding
+import androidx.room.Room
 import com.example.english_memo.MainActivity
 import com.example.english_memo.R
 import com.example.english_memo.Room_memo.Translage_memo
+import com.example.english_memo.Room_memo.UserDao
+import com.example.english_memo.rxjavaTranning.English_Database
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -23,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_main_bar_activitity.*
 import kotlinx.android.synthetic.main.activity_main_bar_activitity.view.*
 import kotlinx.android.synthetic.main.game_item.*
+import kotlin.random.Random
 import kotlin.system.exitProcess
 
 class Game_Activity : AppCompatActivity() {
@@ -30,20 +34,7 @@ class Game_Activity : AppCompatActivity() {
     lateinit var profileAdapter: Game_Adapter
     val profiles = mutableListOf<Profiles>()
 
-    companion object{
-        private var imageUri : Uri? = null
-        private val fireStorage = FirebaseStorage.getInstance().reference
-        private val fireDatabase = FirebaseDatabase.getInstance().reference
-        private val user = Firebase.auth.currentUser
-        private val uid = user?.uid.toString()
 
-
-        private lateinit var auth: FirebaseAuth
-
-        fun newInstance() : MainActivity {
-            return MainActivity()
-        }
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,9 +47,33 @@ class Game_Activity : AppCompatActivity() {
             //startActivity(Intent(this, Real_Community2::class.java))
         }
 
-        go_word.setOnClickListener {
-            startActivity(Intent(this, Game_word::class.java))
+        val database: English_Database = Room.databaseBuilder(
+            applicationContext,
+            English_Database::class.java, "RxKotlin_English"
+        )
+            .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
+            .build()
+
+        var userdao: UserDao
+
+        val userList = database.EnglishDao().getGameAll()
+
+        var random = Random
+
+        val num = userList!!.size?.let {
+            random.nextInt(it)
         }
+
+        go_word.setOnClickListener {
+            if(userList.size <= 9) {
+                Toast.makeText(this@Game_Activity, "최소 10개이상은 단어가 등록되어있어야 합니다!", Toast.LENGTH_SHORT).show()
+            } else {
+                startActivity(Intent(this, Game_word::class.java))
+            }
+        }
+
+
     }
 
     private fun initRecycler() {
@@ -94,6 +109,8 @@ class Game_Activity : AppCompatActivity() {
             mLayout.addView(tvName)
             builder.setView(mLayout)
 
+            /*
+
             builder.setPositiveButton("확인") { dialog, which ->
 
                 auth = FirebaseAuth.getInstance()
@@ -108,6 +125,8 @@ class Game_Activity : AppCompatActivity() {
             builder.setNegativeButton("취소") { dialog, which ->
 
             }
+
+             */
             builder.show()
         }
 

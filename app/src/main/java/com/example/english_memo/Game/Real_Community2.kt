@@ -15,6 +15,7 @@ import com.example.english_memo.NaverAPI
 import com.example.english_memo.R
 import com.example.english_memo.ResultTransferPapago
 import com.example.english_memo.Room_memo.*
+import com.example.english_memo.rxjavaTranning.English_Database
 import kotlinx.android.synthetic.main.activity_game_word.*
 import kotlinx.android.synthetic.main.activity_real_community2.*
 import kotlinx.android.synthetic.main.activity_translate.*
@@ -58,6 +59,7 @@ class Real_Community2 : AppCompatActivity() {
         //
 
         correct_input.setOnClickListener {
+
             Translate123()
 
             count_number2++
@@ -88,23 +90,26 @@ class Real_Community2 : AppCompatActivity() {
     }
 
     fun Problem_produce() {
-            val database: RoomAppDb = Room.databaseBuilder(
-                applicationContext,
-                RoomAppDb::class.java, "AppDBB"
-            )
-                .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build()
+        val database: English_Database = Room.databaseBuilder(
+            applicationContext,
+            English_Database::class.java, "RxKotlin_English"
+        )
+            .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
+            .build()
 
-            var userdao: UserDao
+        var userdao: UserDao
 
-            val userList = database?.userDao()?.getUserAll()
+        val userList = database.EnglishDao().getGameAll()
 
-            var random = Random
+        var random = Random
 
-            val num = userList?.size?.let { random.nextInt(it) }
+        val num = userList!!.size?.let {
+            random.nextInt(it)
+        }
 
-            var arr: ArrayList<String> = ArrayList()
+
+        var arr: ArrayList<String> = ArrayList()
             for (i in userList!!) {
                 // haha2.append(i.contents)
                 arr.add(i.title.toString())
