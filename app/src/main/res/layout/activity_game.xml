@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Game.Game_Activity"
     android:orientation="vertical"
-    android:background="@drawable/game_back">
+    android:background="@drawable/game_backnew">
 
     <include layout="@layout/activity_main_bar_activitity"/>
 

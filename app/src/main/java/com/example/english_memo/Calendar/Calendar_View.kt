@@ -1,5 +1,6 @@
 package com.example.english_memo.Calendar
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
@@ -87,5 +88,9 @@ class Calendar_View : AppCompatActivity(), OnItemClick {
 
     override fun deleteTodo(English: English) {
         viewModel.delete(English)
+    }
+
+    override fun check_memo(dialog: Dialog) {
+        TODO("Not yet implemented")
     }
 }

@@ -22,7 +22,9 @@ import com.example.english_memo.*
 import com.example.english_memo.BuildConfig.Naver_id
 import com.example.english_memo.BuildConfig.Naver_password
 import com.example.english_memo.Room_memo.*
+import com.example.english_memo.rxjavaTranning.English
 import com.example.english_memo.rxjavaTranning.English_Database
+import com.example.english_memo.rxjavaTranning.OnItemClick
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -42,39 +44,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.random.Random
 import kotlin.system.exitProcess
 
-class Game_word : AppCompatActivity() {
-
-    private lateinit var recyclerViewAdapter: RecyclerViewAdapter
+class Game_word : AppCompatActivity(), OnItemClick  {
     lateinit var viewModel: MainActivityViewModel
 
-
-    var items123 = ArrayList<UserEntity>()
-
-    val CLIENT_ID = Naver_id
-    val CLIENT_SECRET = Naver_password
-    val BASE_URL_NAVER_API = BuildConfig.BASE_URL_NAVER_API
-
     var arr_tempList : ArrayList<String> = ArrayList()
-
-    lateinit var word123 : String
 
     var count_number : Int = 1
 
     var correct_number : Int = 0
 
+    private lateinit var game_ResultActivity : game_Result_Activity
+
     companion object{
-        private var imageUri : Uri? = null
-        private val fireStorage = FirebaseStorage.getInstance().reference
-        private val fireDatabase = FirebaseDatabase.getInstance().reference
-        private val user = Firebase.auth.currentUser
-        private val uid = user?.uid.toString()
-
-
-        private lateinit var auth: FirebaseAuth
-
-        fun newInstance() : MainActivity {
-            return MainActivity()
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,30 +68,13 @@ class Game_word : AppCompatActivity() {
 
 
         correct_input2.setOnClickListener {
-            click()
-            count_number++
-            count.text = count_number.toString() + " /"
             if(count_number == 10) {
-                val builder = AlertDialog.Builder(this)
-                val tvName = TextView(this)
-                tvName.text = "$correct_number 문제 맞으셧습니다!"
-
-                val mLayout = LinearLayout(this)
-                mLayout.orientation = LinearLayout.VERTICAL
-                mLayout.setPadding(16)
-                mLayout.addView(tvName)
-                builder.setView(mLayout)
-
-                builder.setTitle("게임 결과")
-                builder.setPositiveButton("다시하기") { dialog, which ->
-                    count_number = 0
-
-                    correct_number = 0
-                    Problem_produce()
-                    Answer_produce()
-                    correct_input2.performClick()
-                }
-                builder.show()
+                game_ResultActivity = game_Result_Activity(this@Game_word,correct_number, this@Game_word)
+                game_ResultActivity.show()
+            } else {
+                click()
+                count_number++
+                count.text = count_number.toString() + " /"
             }
         }
 
@@ -119,17 +83,16 @@ class Game_word : AppCompatActivity() {
 
 
     fun Problem_produce() {
-        val database: English_Database = Room.databaseBuilder(
+        val database: RoomAppDb = Room.databaseBuilder(
             applicationContext,
-            English_Database::class.java, "RxKotlin_English"
+            RoomAppDb::class.java, "AppDBB"
         )
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
 
-        var userdao: UserDao
 
-        val userList = database.EnglishDao().getGameAll()
+        val userList = database.userDao()!!.getAllUserInfo()
 
         var random = Random
 
@@ -154,17 +117,15 @@ class Game_word : AppCompatActivity() {
     }
 
     fun Answer_produce() {
-        val database: English_Database = Room.databaseBuilder(
+        val database: RoomAppDb = Room.databaseBuilder(
             applicationContext,
-            English_Database::class.java, "RxKotlin_English"
+            RoomAppDb::class.java, "AppDBB"
         )
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
 
-        var userdao: UserDao
-
-        val userList = database.EnglishDao().getGameAll()
+        val userList = database.userDao()!!.getAllUserInfo()
 
         var random = Random
 
@@ -231,36 +192,6 @@ class Game_word : AppCompatActivity() {
         setSupportActionBar(main_layout_toolbar) // 툴바를 액티비티의 앱바로 지정
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
-        main_layout_toolbar.log_out.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-
-            val tvName = TextView(this)
-            tvName.text = "\n\n로그아웃 하시겟습니까?"
-
-            val mLayout = LinearLayout(this)
-            mLayout.orientation = LinearLayout.VERTICAL
-            mLayout.setPadding(16)
-            mLayout.addView(tvName)
-            builder.setView(mLayout)
-
-            builder.setPositiveButton("확인") { dialog, which ->
-                auth = FirebaseAuth.getInstance()
-
-                Toast.makeText(this@Game_word, "로그아웃 되었습니다!", Toast.LENGTH_SHORT).show()
-                auth.signOut()
-                //println(userProfile)
-                ActivityCompat.finishAffinity(this@Game_word)
-                exitProcess(0)
-                finish()
-            }
-            builder.setNegativeButton("취소") { dialog, which ->
-
-            }
-            builder.show()
-        }
-
     }
 
     fun card_view_cloor() {
@@ -291,6 +222,19 @@ class Game_word : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun deleteTodo(English: English) {
+        TODO("Not yet implemented")
+    }
+
+    override fun check_memo(dialog: Dialog) {
+        dialog.dismiss()
+        count_number = 0
+        correct_number = 0
+        Problem_produce()
+        Answer_produce()
+        correct_input2.performClick()
     }
 
 }

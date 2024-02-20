@@ -1,18 +1,19 @@
 package com.example.english_memo
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
 import androidx.core.view.setPadding
-import com.example.english_memo.Calendar.Calendar_View
+import com.example.english_memo.ai_Project.ai_Project_Actvity
 import com.example.english_memo.Game.Game_Activity
-import com.example.english_memo.Real_Community.Cloud_firestore
 import com.example.english_memo.Login.Friend
 import com.example.english_memo.Room_memo.Translage_memo
 import com.example.english_memo.rxjavaTranning.First_Translate_Activity
@@ -35,9 +36,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,12 +50,6 @@ class MainActivity : AppCompatActivity() {
         private val user = Firebase.auth.currentUser
         private val uid = user?.uid.toString()
 
-
-        private lateinit var auth: FirebaseAuth
-
-        fun newInstance() : MainActivity {
-            return MainActivity()
-        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -61,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        getKeyHash()
 
         Translate_gogo.setOnClickListener {
             var intent1 = Intent(this, Translate::class.java)
@@ -100,7 +97,9 @@ class MainActivity : AppCompatActivity() {
         day3.setText(day3text.format(currentTime) + "th")
 
         gogo_community.setOnClickListener {
-            var intent3 = Intent(this, Calendar_View::class.java)
+      /*      var intent3 = Intent(this, Calendar_View::class.java)
+            startActivity(intent3)*/
+            var intent3 = Intent(this, ai_Project_Actvity::class.java)
             startActivity(intent3)
         }
 
@@ -151,7 +150,7 @@ class MainActivity : AppCompatActivity() {
             setSupportActionBar(main_layout_toolbar) // 툴바를 액티비티의 앱바로 지정
             supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
 
-            main_layout_toolbar.log_out.setOnClickListener {
+           /* main_layout_toolbar.log_out.setOnClickListener {
                 val builder = AlertDialog.Builder(this@MainActivity)
 
                 val tvName = TextView(this@MainActivity)
@@ -177,6 +176,21 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 builder.show()
+            }*/
+        }
+    }
+
+    fun getKeyHash() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val packageInfo = this@MainActivity.packageManager.getPackageInfo(this@MainActivity.packageName, PackageManager.GET_SIGNING_CERTIFICATES)
+            for (signature in packageInfo.signingInfo.apkContentsSigners) {
+                try {
+                    val md = MessageDigest.getInstance("SHA")
+                    md.update(signature.toByteArray())
+                    Log.d("getKeyHash", "key hash: ${Base64.encodeToString(md.digest(), Base64.NO_WRAP)}")
+                } catch (e: NoSuchAlgorithmException) {
+                    Log.w("getKeyHash", "Unable to get MessageDigest. signature=$signature", e)
+                }
             }
         }
     }

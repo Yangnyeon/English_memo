@@ -12,7 +12,6 @@
         android:id="@+id/main_layout_toolbar"
         android:layout_width="match_parent"
         android:layout_height="55sp"
-        android:minHeight="?attr/actionBarSize"
         app:contentInsetStart="0dp">
 
         <TextView
@@ -27,15 +26,6 @@
             android:layout_gravity="center" />
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_logout_24"
-            android:id="@+id/log_out"
-            android:layout_gravity="end"
-            android:layout_marginRight="16sp"
-            android:padding="8sp"
-            ></ImageView>
 
     </androidx.appcompat.widget.Toolbar>
 

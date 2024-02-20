@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -14,6 +15,8 @@ import androidx.core.view.setPadding
 import androidx.room.Room
 import com.example.english_memo.MainActivity
 import com.example.english_memo.R
+import com.example.english_memo.Room_memo.RoomAppDb
+import com.example.english_memo.Room_memo.RoomAppDb_Impl
 import com.example.english_memo.Room_memo.Translage_memo
 import com.example.english_memo.Room_memo.UserDao
 import com.example.english_memo.rxjavaTranning.English_Database
@@ -43,30 +46,22 @@ class Game_Activity : AppCompatActivity() {
 
         initRecycler()
 
-        go_Dictaion.setOnClickListener {
-            //startActivity(Intent(this, Real_Community2::class.java))
-        }
-
-        val database: English_Database = Room.databaseBuilder(
+        val database: RoomAppDb = Room.databaseBuilder(
             applicationContext,
-            English_Database::class.java, "RxKotlin_English"
+            RoomAppDb::class.java, "AppDBB"
         )
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
 
-        var userdao: UserDao
 
-        val userList = database.EnglishDao().getGameAll()
 
-        var random = Random
+        val userList = database.userDao()!!.getAllUserInfo()
 
-        val num = userList!!.size?.let {
-            random.nextInt(it)
-        }
 
         go_word.setOnClickListener {
-            if(userList.size <= 9) {
+            if(userList!!.size <= 9) {
+                Log.d("용량확인", userList!!.size.toString())
                 Toast.makeText(this@Game_Activity, "최소 10개이상은 단어가 등록되어있어야 합니다!", Toast.LENGTH_SHORT).show()
             } else {
                 startActivity(Intent(this, Game_word::class.java))
@@ -97,7 +92,7 @@ class Game_Activity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        main_layout_toolbar.log_out.setOnClickListener {
+       /* main_layout_toolbar.log_out.setOnClickListener {
             val builder = AlertDialog.Builder(this)
 
             val tvName = TextView(this)
@@ -109,7 +104,7 @@ class Game_Activity : AppCompatActivity() {
             mLayout.addView(tvName)
             builder.setView(mLayout)
 
-            /*
+            *//*
 
             builder.setPositiveButton("확인") { dialog, which ->
 
@@ -126,9 +121,9 @@ class Game_Activity : AppCompatActivity() {
 
             }
 
-             */
+             *//*
             builder.show()
-        }
+        }*/
 
     }
 

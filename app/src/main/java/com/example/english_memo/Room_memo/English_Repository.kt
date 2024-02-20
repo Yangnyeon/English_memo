@@ -17,19 +17,9 @@ class English_Repository(application: Application) {
 
 
 
-    fun searchDatabase(searchQuery: String): Flow<List<UserEntity>> {
+    fun searchDatabase(searchQuery: String): LiveData<List<UserEntity>> {
         return UserDao.searchDatabase(searchQuery)
     }
-
-    /*
-    fun items(): Observable<List<ToDoModel>> = store.all()
-        .map {
-                all -> all.map {
-            it.toModel()
-                }
-        }
-
-     */
 
 
 }

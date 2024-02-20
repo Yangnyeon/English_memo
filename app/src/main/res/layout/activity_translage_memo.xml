@@ -6,73 +6,85 @@
     android:layout_height="match_parent"
     tools:context=".Room_memo.Translage_memo"
     android:orientation="vertical"
-    android:background="@drawable/translate_bg7"
+    android:background="@drawable/spaceship"
     >
 
     <include layout="@layout/activity_main_bar_activitity"/>
 
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_margin="16sp"
-        android:fontFamily="@font/font"
-        android:text="내 단어장"
-        android:textColor="#000000"
-        android:textSize="40sp"></TextView>
-
-
-    <androidx.appcompat.widget.SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/English_Searchview"
-        ></androidx.appcompat.widget.SearchView>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10sp"
-        >
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="단어 숨기기"
-            android:textSize="20sp"
-            android:layout_marginLeft="10sp"
-            android:id="@+id/contents_visible"
-            ></CheckBox>
-
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="뜻 숨기기"
-            android:textSize="20sp"
-            android:layout_marginLeft="10sp"
-            android:id="@+id/name_visible"
-            ></CheckBox>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:descendantFocusability="blocksDescendants"
         >
 
-        <androidx.recyclerview.widget.RecyclerView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/recyclerView"
-            ></androidx.recyclerview.widget.RecyclerView>
+            android:orientation="vertical"
+            >
 
 
-    </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="16sp"
+                android:fontFamily="@font/font"
+                android:text="내 단어장"
+                android:textColor="#FBFBFB"
+                android:textSize="30sp"></TextView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp"
+                >
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="단어 숨기기"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="10sp"
+                    android:id="@+id/contents_visible"
+                    ></CheckBox>
+
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="뜻 숨기기"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginLeft="10sp"
+                    android:id="@+id/name_visible"
+                    ></CheckBox>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:descendantFocusability="blocksDescendants"
+                >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/word_RecyclerView"
+                    android:overScrollMode="never"
+                    ></androidx.recyclerview.widget.RecyclerView>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
 
 

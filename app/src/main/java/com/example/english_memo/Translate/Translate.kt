@@ -4,13 +4,11 @@ import android.content.ContentValues
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.english_memo.BuildConfig.*
 import com.example.english_memo.MainActivity
 import com.example.english_memo.NaverAPI
@@ -39,28 +37,25 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.setPadding
 import com.example.english_memo.Room_memo.Translage_memo
+import kotlinx.android.synthetic.main.activity_first_translate.*
+import kotlinx.android.synthetic.main.activity_translate.btn
+import kotlinx.android.synthetic.main.activity_translate.end_lag
+import kotlinx.android.synthetic.main.activity_translate.end_reallag
+import kotlinx.android.synthetic.main.activity_translate.et_target
+import kotlinx.android.synthetic.main.activity_translate.plus
+import kotlinx.android.synthetic.main.activity_translate.rotate
+import kotlinx.android.synthetic.main.activity_translate.start_lag
+import kotlinx.android.synthetic.main.activity_translate.start_reallag
+import kotlinx.android.synthetic.main.activity_translate.textView
 import java.util.*
 import kotlin.system.exitProcess
 
 
-class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
+class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener, TextToSpeech.OnInitListener  {
 
-    private lateinit var recyclerViewAdapter: RecyclerViewAdapter
     lateinit var viewModel: MainActivityViewModel
 
-    companion object{
-        private var imageUri : Uri? = null
-        private val fireStorage = FirebaseStorage.getInstance().reference
-        private val fireDatabase = FirebaseDatabase.getInstance().reference
-
-
-        fun newInstance() : MainActivity {
-            return MainActivity()
-        }
-    }
-
-
-    var items123 = ArrayList<UserEntity>()
+    private lateinit var textToSpeech: TextToSpeech
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,25 +67,8 @@ class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
         val BASE_URL_NAVER_API = BASE_URL_NAVER_API
 
 
-        //
+        viewModel = ViewModelProviders.of(this)[MainActivityViewModel::class.java]
 
-        // 리사이클러뷰
-
-        recyclerView12.apply {
-            layoutManager = LinearLayoutManager(context)
-            recyclerViewAdapter = RecyclerViewAdapter(this@Translate, items123)//이거 알트 엔터후 4번째꺼
-            adapter = recyclerViewAdapter
-            val divider = DividerItemDecoration(context, StaggeredGridLayoutManager.VERTICAL)
-            addItemDecoration(divider)
-        }
-
-        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-        viewModel.getAllUsersObservers().observe(this, androidx.lifecycle.Observer {
-            recyclerViewAdapter?.setListData(ArrayList(it))
-            recyclerViewAdapter?.notifyDataSetChanged()
-        })
-
-        //
 
         rotate.setOnClickListener {
             if(start_lag.text == "한국어") {
@@ -130,11 +108,9 @@ class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
                         }
                     }
                     Log.d(ContentValues.TAG, "성공 : ${response.raw()}")
-                    //textView.text = "성공 : ${response.raw()}"
                 }
 
                 override fun onFailure(call: Call<ResultTransferPapago>, t: Throwable) {
-                    //Log.d(TAG, "실패 : $t")
                     textView.text = "실패 : $t"
                 }
             })
@@ -161,37 +137,10 @@ class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        textToSpeech = TextToSpeech(this, this)
 
-        main_layout_toolbar.log_out.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-
-            val tvName = TextView(this)
-            tvName.text = "\n\n로그아웃 하시겟습니까?"
-
-            val mLayout = LinearLayout(this)
-            mLayout.orientation = LinearLayout.VERTICAL
-            mLayout.setPadding(16)
-            mLayout.addView(tvName)
-            builder.setView(mLayout)
-
-            /*
-            builder.setPositiveButton("확인") { dialog, which ->
-
-                auth = FirebaseAuth.getInstance()
-
-                Toast.makeText(this@Translate, "로그아웃 되었습니다!", Toast.LENGTH_SHORT).show()
-                auth.signOut()
-                //println(userProfile)
-                ActivityCompat.finishAffinity(this@Translate)
-                exitProcess(0)
-                finish()
-            }
-            builder.setNegativeButton("취소") { dialog, which ->
-
-            }
-            builder.show()
-
-             */
+        english_Sound.setOnClickListener {
+            speak(textView.text.toString())
         }
 
     }
@@ -220,5 +169,22 @@ class Translate : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
 
     override fun onItemvisible(user: UserEntity) {
         TODO("Not yet implemented")
+    }
+
+    private fun speak(text: String) {
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+    }
+
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            // Set language for TextToSpeech
+            val result = textToSpeech.setLanguage(Locale.US)
+
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                // Language data is missing or not supported, handle accordingly
+            }
+        } else {
+            // Initialization failed, handle accordingly
+        }
     }
 }

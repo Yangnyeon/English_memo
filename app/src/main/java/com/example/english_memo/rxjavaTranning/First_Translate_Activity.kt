@@ -87,12 +87,9 @@ class First_Translate_Activity: AppCompatActivity() {
                             textView.text = it.message.result.translatedText.toString()
                         }
                     }
-                    Log.d(ContentValues.TAG, "성공 : ${response.raw()}")
-                    //textView.text = "성공 : ${response.raw()}"
                 }
 
                 override fun onFailure(call: Call<ResultTransferPapago>, t: Throwable) {
-                    //Log.d(TAG, "실패 : $t")
                     textView.text = "실패 : $t"
                 }
             })

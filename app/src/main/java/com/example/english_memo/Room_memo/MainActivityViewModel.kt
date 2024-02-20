@@ -5,9 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
+import kotlinx.coroutines.flow.Flow
 
 class MainActivityViewModel(app: Application) : AndroidViewModel(app) {
-    var allUsers : MutableLiveData<List<UserEntity>>
+    var allUsers : MutableLiveData<ArrayList<UserEntity>>
 
     private val repository = English_Repository(app)
 
@@ -18,7 +19,7 @@ class MainActivityViewModel(app: Application) : AndroidViewModel(app) {
     }
 
 
-    fun getAllUsersObservers(): MutableLiveData<List<UserEntity>> {
+    fun getAllUsersObservers(): MutableLiveData<ArrayList<UserEntity>> {
         return allUsers
     }
 
@@ -26,7 +27,7 @@ class MainActivityViewModel(app: Application) : AndroidViewModel(app) {
         val userDao = RoomAppDb.getAppDatabase((getApplication()))?.userDao()
         val list = userDao?.getAllUserInfo()
 
-        allUsers.postValue(list)
+        allUsers.postValue(list as ArrayList<UserEntity>?)
     }
 
     fun insertUserInfo(entity: UserEntity){
@@ -50,7 +51,9 @@ class MainActivityViewModel(app: Application) : AndroidViewModel(app) {
         getAllUsers()
     }
 
-    fun searchDatabase(searchQuery: String): LiveData<List<UserEntity>> {
-        return repository.searchDatabase(searchQuery).asLiveData()
+    fun searchDatabase(searchQuery: String): LiveData<List<UserEntity>>? {
+/*        return repository.searchDatabase(searchQuery).asLiveData()*/
+        val userDao = RoomAppDb.getAppDatabase(getApplication())?.userDao()
+        return userDao?.searchDatabase(searchQuery)
     }
 }

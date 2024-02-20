@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/toolås"
+        android:layout_width="350sp"
+        android:layout_height="wrap_content"
+        tools:context=".fragment3.MyCustomDialog"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/dialog_background"
+        >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="32sp"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/DESC_KOR"
+                    android:textColor="#212022"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="게임결과"
+                    android:textSize="32sp"
+                    android:fontFamily="@font/jua"
+                    android:layout_marginTop="30sp"
+                    ></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30sp"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:fontFamily="@font/jua"
+                        android:id="@+id/lucky_count"
+                        android:textSize="24sp"
+                        ></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 문제 맞으셧습니다!"
+                        android:fontFamily="@font/jua"
+                        android:textSize="24sp"
+                        ></TextView>
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="다시하기"
+                    android:id="@+id/reGame"
+                    android:layout_margin="16sp"
+                    android:layout_gravity="right"
+                    ></Button>
+
+
+            </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</FrameLayout>
