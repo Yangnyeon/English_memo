@@ -4,9 +4,11 @@
 
 ###### 네이버 API를 이용해서 번역및 Room데이터베이스를 이용하여 단어장어플을 만들어봤습니다!
 
-<img src="https://user-images.githubusercontent.com/87749498/176985446-3aa5517e-7e60-4e91-83c6-e29fcc314ee3.png"  width="200" height="400"/> <img src="https://user-images.githubusercontent.com/87749498/176985449-59a25ad8-3007-4e07-be1a-d5cb0008f84e.png"  width="200" height="400"/> <img src="https://user-images.githubusercontent.com/87749498/176985453-7eadc3f9-c6f4-4774-926d-4dc160b6b792.png"  width="200" height="400"/> <img src="https://user-images.githubusercontent.com/87749498/176985454-8a93b9fe-ce86-4756-8cc7-bf293c68dbc9.png"  width="200" height="400"/>
+![영어_번역과정](https://github.com/Yangnyeon/English_memo/assets/87749498/f3e913f4-3d9a-4778-a1b1-9b1909f0be00)
+![영어_단어장영상](https://github.com/Yangnyeon/English_memo/assets/87749498/dbd860fb-0894-46ba-be48-f339828f9e8f)
+![영어_인공지능대화](https://github.com/Yangnyeon/English_memo/assets/87749498/c78175f0-6d5b-40f9-ac4c-a637cd5546b5)
+![영어_게임](https://github.com/Yangnyeon/English_memo/assets/87749498/dc422ec6-3742-477d-a5f9-8e99de02375c)
 
-<img src="https://user-images.githubusercontent.com/87749498/176985455-3491edf9-333a-46aa-a6ce-ea061f969b99.png"  width="200" height="400"/> <img src="https://user-images.githubusercontent.com/87749498/176985456-86e2562c-e15c-472a-a00d-dce4d9691ca4.png"  width="200" height="400"/>
 
 
 
